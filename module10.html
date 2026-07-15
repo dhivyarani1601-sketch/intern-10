@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smart Parking Dashboard</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:#0F172A;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+}
+
+.container{
+    width:500px;
+    background:#fff;
+    padding:20px;
+    border-radius:15px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.3);
+}
+
+h2{
+    text-align:center;
+    color:#1E3A8A;
+    margin-bottom:20px;
+}
+
+.summary{
+    display:flex;
+    justify-content:space-around;
+    margin-bottom:20px;
+}
+
+.box{
+    width:45%;
+    text-align:center;
+    padding:15px;
+    border-radius:10px;
+    color:white;
+    font-weight:bold;
+}
+
+.available{
+    background:#22C55E;
+}
+
+.occupied{
+    background:#EF4444;
+}
+
+.parking-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+}
+
+.slot{
+    height:70px;
+    border-radius:10px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.free{
+    background:#22C55E;
+}
+
+.busy{
+    background:#EF4444;
+}
+
+button{
+    width:100%;
+    margin-top:20px;
+    padding:12px;
+    border:none;
+    border-radius:8px;
+    background:#2563EB;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#1D4ED8;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>🅿 Smart Parking Dashboard</h2>
+
+<div class="summary">
+    <div class="box available">
+        Available<br>
+        <span id="available">5</span>
+    </div>
+
+    <div class="box occupied">
+        Occupied<br>
+        <span id="occupied">3</span>
+    </div>
+</div>
+
+<div class="parking-grid" id="parkingGrid">
+
+    <div class="slot free">P1</div>
+    <div class="slot busy">P2</div>
+    <div class="slot free">P3</div>
+    <div class="slot busy">P4</div>
+    <div class="slot free">P5</div>
+    <div class="slot free">P6</div>
+    <div class="slot busy">P7</div>
+    <div class="slot free">P8</div>
+
+</div>
+
+<button onclick="updateParking()">
+Refresh Parking Status
+</button>
+
+</div>
+
+<script>
+
+function updateParking(){
+
+    const slots = document.querySelectorAll(".slot");
+
+    let available = 0;
+    let occupied = 0;
+
+    slots.forEach(slot=>{
+
+        if(Math.random()>0.5){
+
+            slot.className="slot free";
+            slot.style.background="#22C55E";
+            available++;
+
+        }else{
+
+            slot.className="slot busy";
+            slot.style.background="#EF4444";
+            occupied++;
+
+        }
+
+    });
+
+    document.getElementById("available").innerHTML = available;
+    document.getElementById("occupied").innerHTML = occupied;
+
+}
+
+</script>
+
+</body>
+</html>
